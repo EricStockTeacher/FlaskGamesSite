@@ -4,7 +4,11 @@
     <h2>List of all Favourite Games</h2>
     <ul>
         {% for name, game in games.items() %}
-            <li>{{ name }}:{{game}}</li>
+            <li>{{ name }}:
+            {% for key, value in game.items() %}
+                <span>{{key}} : {{value}}</span>
+             {% endfor %}
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}
