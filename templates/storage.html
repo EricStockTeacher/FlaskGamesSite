@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+
+{% block body %}
+    <h2>List of all Favourite Games</h2>
+    <ul>
+        {% for name, game in games.items() %}
+            <li>{{ name }}:{{game}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
