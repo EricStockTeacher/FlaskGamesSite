@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block body %}
+    <h3>Check Numbers:</h3>
+    <form method = "post" action="/award">
+        <p>Num1</p>
+        <input type="number" name="num1" required>
+        <br><br>
+        <p>Num2</p>
+        <input type="number" name="num2" required>
+        <br><br>
+        <p>Num3</p>
+        <input type="number" name="num3" required>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
