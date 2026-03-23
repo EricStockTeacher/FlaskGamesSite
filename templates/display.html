@@ -6,7 +6,12 @@
         {% for name, game in games.items() %}
             <li>{{ name }}:
             {% for key, value in game.items() %}
-                <span>{{key}} : {{value}}</span>
+                {% if key == 'img' %}
+                    <image src="{{file_location}}/{{value}}"></image>
+                {% else %}
+                    <span>{{key}} : {{value}}</span>
+                {% endif %}
+
              {% endfor %}
             </li>
         {% endfor %}

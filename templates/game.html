@@ -2,7 +2,7 @@
 
 {% block body %}
     <h3>Enter your favourite Video Game</h3>
-    <form method = "post" action="/greet">
+    <form method = "post" action="/greet" enctype="multipart/form-data">
         <p>Game Name</p>
         <input type="text" name="game" required>
         <br><br>
@@ -14,6 +14,8 @@
         <br><br>
         <p>Release Year</p>
         <input type="text" name="year" required>
+        <br><br>
+        <input type="file" name="game_img" required>
         <br><br>
         <input type="submit" value="Submit">
     </form>

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, flash
 from flask_session import Session
+import os
 
 app = Flask(__name__)
 
@@ -7,6 +8,8 @@ app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_TYPE'] = "filesystem"
 
 Session(app)
+
+file_save_location = "static/images"
 
 #app.secret_key = "mysecretkey"
 #games = {}
@@ -27,12 +30,16 @@ def greet_user():
     platform = request.form['platform']
     value = request.form['value']
     year = request.form['year']
+    file = request.files['game_img']
+    if file.filename != '':
+        save_file_name = os.path.join(file_save_location, file.filename)
+        file.save(save_file_name)
 
     if "games" in session:
-        session["games"][game_name] = {'platform':platform, 'value':value, 'year':year}
+        session["games"][game_name] = {'platform':platform, 'value':value, 'year':year, 'img':file.filename}
     else:
         session["games"] = {}
-        session["games"][game_name] = {'platform': platform, 'value': value, 'year': year}
+        session["games"][game_name] = {'platform': platform, 'value': value, 'year': year, 'img':file.filename}
 
     flash(f"Game {game_name} added!!")
     #session[game_name] = {'platform':platform, 'value':value, 'year':year}
@@ -41,7 +48,7 @@ def greet_user():
 @app.route('/display')
 def display():
     print(session)
-    return render_template('display.html', games=session.get("games", {}))
+    return render_template('display.html', games=session.get("games", {}), file_location=file_save_location)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
