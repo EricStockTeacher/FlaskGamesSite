@@ -5,10 +5,20 @@
     <title>Title</title>
 </head>
 <body>
+
+
     <h2>Erics Website</h2>
     <a href="/">Home</a>
     <a href="/data">Data</a>
     <a href="/display">All Fav Games</a>
+
+     {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
 
    {% block body %}
 

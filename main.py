@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, flash
 from flask_session import Session
 
 app = Flask(__name__)
@@ -13,6 +13,8 @@ Session(app)
 
 @app.route('/')
 def hello_world():
+    if "games" not in session:
+        flash("Welcome to the site, please add a game to get started!!")
     return render_template("main.html")
 
 @app.route('/data' )
@@ -31,8 +33,10 @@ def greet_user():
     else:
         session["games"] = {}
         session["games"][game_name] = {'platform': platform, 'value': value, 'year': year}
+
+    flash(f"Game {game_name} added!!")
     #session[game_name] = {'platform':platform, 'value':value, 'year':year}
-    return render_template('greet.html', game_name=game_name)
+    return render_template('game.html')
 
 @app.route('/display')
 def display():
